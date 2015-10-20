@@ -1,0 +1,39 @@
+<!doctype html>
+<html ng-app="gridApp">
+  <head>
+    <title>My Angular App</title>
+    <script src="js/angular.min.js"></script>
+    <script src="js/GridEx.js"></script>
+    <link rel="stylesheet" href="css/main.css"></link>
+  </head>
+  <body >
+  	<table>
+
+  	</table>
+  	<div ng-controller="gridController">
+  	
+  	<input type="text" ng-model="name" >
+  	<label>{{name}}</label>
+
+    add to table
+    <input type="submit" value="add column" ng-click="addColumn()" >
+
+    <table>
+      <thead>
+        <tr>
+        <th ng-repeat="col in columns">
+          {{col.caption}}          
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="row in rows">
+        <th ng-repeat="col in columns">
+          {{row[$index]}}          
+        </th>
+      </tr>
+      </tbody>
+    </table>
+  	</div>
+  </body>
+</html>
