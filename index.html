@@ -5,6 +5,7 @@
     <script src="js/angular.min.js"></script>
     <script src="js/GridEx.js"></script>
     <link rel="stylesheet" href="css/main.css"></link>
+
   </head>
   <body>
   	<div ng-controller="gridController">
@@ -18,19 +19,19 @@
     <table>
       <thead>
         <tr>
-        <th ng-repeat="col in columns">
-          {{col.caption}}          
-        </th>
+          <th ng-repeat="col in columns" ng-click="orderBy($index)">
+            {{col.caption}}
+          </th>
       </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="row in rows">
-        <th ng-repeat="col in columns">
-          {{row[$index]}}          
-        </th>
-      </tr>
+        <tr ng-repeat="row in rows | orderBy:getOrderBy()">
+          <th ng-repeat="col in columns">
+            {{row[col.name]}}
+          </th>
+        </tr>
       </tbody>
     </table>
   	</div>
-  </body>
+  </body>  
 </html>
