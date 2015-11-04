@@ -19,14 +19,14 @@
     <table>
       <thead>
         <tr>
-          <th ng-repeat="col in columns" ng-click="orderBy($index)">
+          <th ng-repeat="col in columns()" ng-click="orderBy($index)">
             {{col.caption}}
           </th>
       </tr>
       </thead>
       <tbody>
         <tr ng-repeat="row in rows | orderBy:getOrderBy()">
-          <th ng-repeat="col in columns">
+          <th ng-repeat="col in columns()">
             {{row[col.name]}}
           </th>
         </tr>

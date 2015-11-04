@@ -3,16 +3,26 @@ var app = angular.module('gridApp', []);
 app.controller('gridController', function ($scope) {
   
   $scope.columnName = "col name";
-  $scope.columns = [new column('Name'),
-                    new column('Age'),
-                    new column('BirthDate'),
-                    new column('Salary')];
+  var allColumns = [new column('Name', false),
+                       new column('Age'),
+                       new column('BirthDate'),
+                       new column('Salary')];
+
+  $scope.columns = function(){
+    var visibleCols = [];
+    for (var i = 0; i <= allColumns.length - 1; i++) {
+      if(allColumns[i].visible === true)
+        visibleCols.push(allColumns[i]);
+    };
+    return visibleCols;
+  }
   $scope.getColumnName = function(colIndex){
-    var found = $scope.columns[colIndex]['name'];
+    var visibleCols = $scope.columns();
+    var found = visibleCols[colIndex]['name'];
     return found;
   }
 
-  $scope.addColumn = function(){
+  $scope.addColumn = function() {
     $scope.columns.push(new column(this.columnName));
   }
 
@@ -33,9 +43,7 @@ app.controller('gridController', function ($scope) {
   }
 
   $scope.getOrderBy = function() {
-    if($scope.order[0])
-      {
-        alert($scope.getColumnName($scope.order[0]));
+    if($scope.order[0]) {
         return $scope.getColumnName($scope.order[0]);
       }
   };
@@ -44,7 +52,6 @@ app.controller('gridController', function ($scope) {
   $scope.order = [];
   $scope.orderBy = function(colIndex){
     $scope.order = [];
-    alert(colIndex)
     $scope.order.push(colIndex);
   }
 
@@ -52,9 +59,10 @@ app.controller('gridController', function ($scope) {
 
 });
 
-function column(caption) {
+function column(caption,visible) {
   this.caption = caption;
   this.name = caption;
   this.dataType = "";
   this.displayOrder = -1;
+  this.visible = typeof visible !== 'undefined' ? visible : true;
 }
