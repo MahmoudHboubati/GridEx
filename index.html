@@ -25,7 +25,7 @@
       </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="row in rows | orderBy:getOrderBy()">
+        <tr ng-repeat="row in rows | orderBy : getOrderBy()">
           <th ng-repeat="col in columns">
             {{row[col.name]}}
           </th>
